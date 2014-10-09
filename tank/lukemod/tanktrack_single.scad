@@ -1,12 +1,16 @@
 scale = 0.5;
-holeRadius = 0.75;
+holeRadius = 0.8;
 //0.4*scale
 
 rotate([0,0,90])
 difference()
 {
+	union(){
    scale([scale, scale, scale]) import("../originals/Tank_Track_2in_single.stl");
-	
+	#translate([0,5,0]) cylinder(r=1.2*scale , h=5, $fn=15);
+	#translate([0,-5,0]) cylinder(r=1.2*scale , h=5, $fn=15); 	
+}
+
 	union()
 	{
 	//	#translate([0,5,-1]) cylinder(r=1 , h=5, $fn=15);
