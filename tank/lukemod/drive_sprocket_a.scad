@@ -4,7 +4,11 @@ wiggle = 0.2;
 
 //at a scale of 0.5 the o-ring gap seems to be for an o-ring with a thickness of 1.82mm (~14th of an inch)
 //o ring has an inner radius of about 7.47mm
-//therefore o-ring needs outer diameter of 12.58mm (nearly 1/2")
+//therefore o-ring needs outer diameter of 12.58mm (nearly 1/2") - WRONG - no idea how I got this number
+//o-ring centre radius ~8.4mm
+
+//outer diameter for the o-ring = 18.58mm
+//inner diameter for the o-ring = 14.94mm
 
 height = 15.24;
 
