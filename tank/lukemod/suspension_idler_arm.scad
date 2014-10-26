@@ -25,27 +25,43 @@ armLength=10 + idlerRadiusAllowance;
 //height of arm which holds the spring
 //springArmLength=
 
-springArmLength=20;
+springArmLength=35;
 
 //same as idler?
 axleRadius = 1;
 
-springArmOffset = 5;
+springArmOffset1 = 20;
+springArmOffset2 = 30;
+springArmOffset3 = 40;
 
 triangleJoinsX=armHeight/2;
 
+springBoltHoleRadius = 1.5;
 
-roundedArm(armThick,armHeight,armLength,axleRadius);
-translate([armLength+idlerRadiusAllowance,gapWidth/2+armThick/2,0]) rotate([0,0,180])  roundedArm(armThick,armHeight,idlerRadiusAllowance,axleRadius);
-translate([armLength+idlerRadiusAllowance,-gapWidth/2-armThick/2,0]) rotate([0,0,180])  roundedArm(armThick,armHeight,idlerRadiusAllowance,axleRadius);
+difference(){
+	
+	union(){
+		roundedArm(armThick,armHeight,armLength,axleRadius);
+		translate([armLength+idlerRadiusAllowance,gapWidth/2+armThick/2,0]) rotate([0,0,180])  roundedArm(armThick,armHeight,idlerRadiusAllowance,axleRadius);
+		translate([armLength+idlerRadiusAllowance,-gapWidth/2-armThick/2,0]) rotate([0,0,180])  roundedArm(armThick,armHeight,idlerRadiusAllowance,axleRadius);
 
-//triangly bit to link the arms together
-linear_extrude(height=armHeight) polygon([[armLength,-gapWidth/2-armThick],[armLength-armThick,-gapWidth/2-armThick],[triangleJoinsX,-armThick/2],[triangleJoinsX,armThick/2],[armLength-armThick,gapWidth/2+armThick],[armLength,gapWidth/2+armThick]]);
-
-
-//arm upwards for spring
-//translate([-armHeight/2,-armThick/2,armHeight/2]) cube([armHeight,armThick,50]);
-translate([armHeight/2,0,armHeight/2]) rotate([0,-90,0]) roundedArm(armThick,armHeight,50,axleRadius);
+		//triangly bit to link the arms together
+		linear_extrude(height=armHeight) polygon([[armLength,-gapWidth/2-armThick],[armLength-armThick,-gapWidth/2-armThick],[triangleJoinsX,-armThick/2],[triangleJoinsX,armThick/2],[armLength-armThick,gapWidth/2+armThick],[armLength,gapWidth/2+armThick]]);
 
 
-//translate([0,20,armHeight/2]) rotate([90,0,0]) cylinder(r=axleRadius, h= 60, $fn = 30);
+		//arm upwards for spring
+		//translate([-armHeight/2,-armThick/2,armHeight/2]) cube([armHeight,armThick,50]);
+		translate([armHeight/2,0,armHeight/2]) rotate([0,-90,0]) roundedArm(armThick,armHeight,springArmLength,axleRadius);
+
+
+		//translate([0,20,armHeight/2]) rotate([90,0,0]) cylinder(r=axleRadius, h= 60, $fn = 30);
+
+		translate([-armHeight/2,0,springArmOffset1]) rotate([0,90,0]) cylinder(r=armHeight/2, $fn=300, h=armHeight);
+		translate([-armHeight/2,0,springArmOffset2]) rotate([0,90,0]) cylinder(r=armHeight/2, $fn=300, h=armHeight);
+		translate([-armHeight/2,0,springArmOffset3]) rotate([0,90,0]) cylinder(r=armHeight/2, $fn=300, h=armHeight);
+	}
+	//hole for the spring bolt
+	translate([-armHeight/2-1,0,springArmOffset1]) rotate([0,90,0]) cylinder(r=springBoltHoleRadius, $fn=300, h=armHeight+2);
+	translate([-armHeight/2-1,0,springArmOffset2]) rotate([0,90,0]) cylinder(r=springBoltHoleRadius, $fn=300, h=armHeight+2);
+	translate([-armHeight/2-1,0,springArmOffset3]) rotate([0,90,0]) cylinder(r=springBoltHoleRadius, $fn=300, h=armHeight+2);
+}
