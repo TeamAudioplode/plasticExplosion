@@ -1,6 +1,6 @@
 
-height = 4;
-wiggle = 0.1;
+height = 8;
+wiggle = 0.2;
 
 union(){
 difference(){

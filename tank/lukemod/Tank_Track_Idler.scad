@@ -8,7 +8,7 @@ smallR = 6.4;
 bigR = 8.73;
 
 smallRHeight=5.46;
-bigRHeight = 4.31;//9.77-5.46;
+bigRHeight = 4.31;//9.77-5.46;id
 //total height = 15.23mm
 
 //hoping to use the steel wire rather than a bearing.  for the tracks used 0.8, but this needs to be a little more free running
