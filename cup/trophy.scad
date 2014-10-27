@@ -15,11 +15,9 @@ rad2 = rad+15;
 toph = 200;
 both = 100;
 
-doughd = 250;
-doughr = 100;
-doughh = 320;
 
-*cylinder(h=both+470, r=rad,$fn=100);
+
+#cylinder(h=both+470, r=rad,$fn=100);
 
 module doughnut(inner_diameter, doughnut_radius, sprinkle_count, sprinkle_radius, sprinkle_length)
 {
@@ -49,14 +47,15 @@ assign(sprinkle_r = acos(sprinkle_offsets[i]/doughnut_radius))
 }
 
 }
+doughd = 200;
+doughr = 80;
+doughh = 320;
 
 
-*translate([-(doughd/2+50),0,doughh]) rotate([90,0,0]) oRing(doughd, doughd+doughr);
+translate([(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 100, 4, 25);
+translate([-(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 100, 4, 25);
 
-*translate([doughd/2+50,0,doughh]) rotate([90,0,0]) oRing(doughd, doughd+doughr);
 
-
-rotate([90,0,0]) doughnut(doughd, doughr, 100, 5, 30);
 
 
 *difference()
