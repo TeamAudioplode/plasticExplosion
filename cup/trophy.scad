@@ -17,7 +17,7 @@ both = 100;
 
 
 
-#cylinder(h=both+470, r=rad,$fn=100);
+cylinder(h=both+470, r=rad,$fn=100);
 
 module doughnut(inner_diameter, doughnut_radius, sprinkle_count, sprinkle_radius, sprinkle_length)
 {
@@ -51,14 +51,15 @@ doughd = 200;
 doughr = 80;
 doughh = 320;
 
+base_height = 200;
 
 translate([(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 100, 4, 25);
 translate([-(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 100, 4, 25);
 
+translate([0,0,-base_height]) linear_extrude(height=base_height, scale=0.75) square([600,550], true);
 
 
-
-*difference()
+difference()
 {
 
 union()
