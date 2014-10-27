@@ -17,7 +17,7 @@ both = 100;
 
 
 
-cylinder(h=both+470, r=rad,$fn=100);
+//cylinder(h=both+470, r=rad,$fn=100);
 
 module doughnut(inner_diameter, doughnut_radius, sprinkle_count, sprinkle_radius, sprinkle_length)
 {
@@ -26,35 +26,41 @@ seed2=50;
 seed3=60;
 oRing(inner_diameter, inner_diameter + (2*doughnut_radius));
 
+radius_add = 0;
+doughnut_radius1=doughnut_radius+radius_add;
+
+
 // Generate sprinkles!
 
 sprinkle_angles1 = rands(0,360,sprinkle_count,seed1);
 sprinkle_angles2 = rands(0,360,sprinkle_count,seed2);
-sprinkle_offsets = rands(-doughnut_radius/2, doughnut_radius/2, sprinkle_count,seed3);
+sprinkle_offsets = rands(-doughnut_radius1/2, doughnut_radius1/2, sprinkle_count,seed3);
 
 for(i = [1:sprinkle_count])
 {
-	assign(sprinkle_h = sqrt(doughnut_radius*doughnut_radius - sprinkle_offsets[i]*sprinkle_offsets[i]))
+	assign(sprinkle_h = sqrt(doughnut_radius1*doughnut_radius1 - sprinkle_offsets[i]*sprinkle_offsets[i]))
 {
 
-assign(sprinkle_r = acos(sprinkle_offsets[i]/doughnut_radius))
+assign(sprinkle_r = acos(sprinkle_offsets[i]/doughnut_radius1))
 {
 
 
-	rotate([0,0,sprinkle_angles1[i]]) translate([inner_diameter-doughnut_radius+sprinkle_offsets[i],doughnut_radius,sprinkle_h+5]) rotate([90,0,sprinkle_angles2[i]]) rotate([sprinkle_r+90,0,0]) cylinder(r=sprinkle_radius, h=sprinkle_length);
-}
+	rotate([0,0,sprinkle_angles1[i]]) translate([inner_diameter-doughnut_radius1+sprinkle_offsets[i]-40,doughnut_radius,sprinkle_h+3]) rotate([90,0,sprinkle_angles2[i]]) rotate([sprinkle_r+90,0,0]) cylinder(r=sprinkle_radius, h=sprinkle_length);
 }
 }
 
+
 }
-doughd = 200;
-doughr = 80;
+
+}
+doughd = 220;
+doughr = 50;
 doughh = 320;
 
 base_height = 200;
 
-translate([(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 100, 4, 25);
-translate([-(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 100, 4, 25);
+translate([(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 150, 3, 20);
+translate([-(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 150, 3, 20);
 
 translate([0,0,-base_height]) linear_extrude(height=base_height, scale=0.75) square([600,550], true);
 
