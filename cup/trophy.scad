@@ -1,11 +1,65 @@
+module oRing(inner_diameter, outer_diameter)
+{
+//inner_diameter = 10;
+//outer_diameter = 12.4;
+
+rotate_extrude(convexity = 10, $fn = 100)
+translate([(inner_diameter+outer_diameter)/4, 0, 0])
+circle(r = (outer_diameter - inner_diameter)/2, $fn = 50); 
+
+}
+
 cenh = 250;
 rad = 197;
 rad2 = rad+15;
 toph = 200;
 both = 100;
 
+doughd = 250;
+doughr = 100;
+doughh = 320;
 
-difference()
+*cylinder(h=both+470, r=rad,$fn=100);
+
+module doughnut(inner_diameter, doughnut_radius, sprinkle_count, sprinkle_radius, sprinkle_length)
+{
+seed1=42;
+seed2=50;
+seed3=60;
+oRing(inner_diameter, inner_diameter + (2*doughnut_radius));
+
+// Generate sprinkles!
+
+sprinkle_angles1 = rands(0,360,sprinkle_count,seed1);
+sprinkle_angles2 = rands(0,360,sprinkle_count,seed2);
+sprinkle_offsets = rands(-doughnut_radius/2, doughnut_radius/2, sprinkle_count,seed3);
+
+for(i = [1:sprinkle_count])
+{
+	assign(sprinkle_h = sqrt(doughnut_radius*doughnut_radius - sprinkle_offsets[i]*sprinkle_offsets[i]))
+{
+
+assign(sprinkle_r = acos(sprinkle_offsets[i]/doughnut_radius))
+{
+
+
+	rotate([0,0,sprinkle_angles1[i]]) translate([inner_diameter-doughnut_radius+sprinkle_offsets[i],doughnut_radius,sprinkle_h+5]) rotate([90,0,sprinkle_angles2[i]]) rotate([sprinkle_r+90,0,0]) cylinder(r=sprinkle_radius, h=sprinkle_length);
+}
+}
+}
+
+}
+
+
+*translate([-(doughd/2+50),0,doughh]) rotate([90,0,0]) oRing(doughd, doughd+doughr);
+
+*translate([doughd/2+50,0,doughh]) rotate([90,0,0]) oRing(doughd, doughd+doughr);
+
+
+rotate([90,0,0]) doughnut(doughd, doughr, 100, 5, 30);
+
+
+*difference()
 {
 
 union()
