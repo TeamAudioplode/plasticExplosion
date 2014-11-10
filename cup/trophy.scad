@@ -17,7 +17,7 @@ both = 100;
 
 
 
-//cylinder(h=both+470, r=rad,$fn=100);
+
 
 module doughnut(inner_diameter, doughnut_radius, sprinkle_count, sprinkle_radius, sprinkle_length)
 {
@@ -59,11 +59,22 @@ doughh = 320;
 
 base_height = 200;
 
+scale([0.1,0.1,0.1]) translate([0,0,200]) union()
+{
+
+difference()
+{
+union()
+{
 translate([(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 150, 3, 20);
 translate([-(doughd/2+80),0,doughh]) rotate([90,0,0]) doughnut(doughd, doughr, 150, 3, 20);
 
-translate([0,0,-base_height]) linear_extrude(height=base_height, scale=0.75) square([600,550], true);
 
+}
+translate([0,0,0]) cylinder(h=cenh+toph+60, r1=rad-21, r2=rad2-20, $fn=100);
+}
+
+translate([0,0,-base_height]) linear_extrude(height=base_height, scale=0.75) square([600,550], true);
 
 difference()
 {
@@ -98,7 +109,7 @@ difference()
 for(i = [0:10:360])
 {
 union()
-{
+{ 
 	rotate([0,2,i]) translate([rad-7,0,5]) scale([1,1.5,1]) cylinder(h=cenh, r=10,$fn=20);
 
 	rotate([0,0,i]) translate([rad-7,0,-1]) scale([1,1.5,1]) sphere(h=cenh, r=10,$fn=20);
@@ -132,5 +143,6 @@ translate([0,0,0]) cylinder(h=both, r1=rad-7, r2=rad-15, $fn=100);
 
 translate([0,0,0]) rotate_extrude(convexity=10, $fn=80) translate([rad-5,0,0]) rotate([0,90,0]) circle(r=10);
 
+}
 }
 
