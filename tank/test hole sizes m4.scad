@@ -1,12 +1,16 @@
 
 distance = 2;
 
-height = 5;
-increment = 0.5;
+height = 10;
+increment = 0.1;
+gap = 5;
+start = 1.8;
+
+count = 4;
 
 
 difference(){
-cube([5,50,10]);
+cube([10,42,height]);
 
 union(){
 
@@ -15,12 +19,12 @@ union(){
 
 
 
-for (i = [1:10])
+for (i = [0:count])
 {
 
-assign(distance = distance +  0.5+0.05*i)
+assign(distance = distance +  gap+increment*i)
 
-translate([5,distance*i+ 0.4*i,height/2.0 ]) rotate([0,90,0]) translate([0,0,-10]) 	cylinder(r=0.7+0.05*i,h=10,$fn=20);
+translate([5,gap + distance*i+ 0.4*i,height/2 ]) rotate([0,90,0]) translate([0,0,-10]) 	cylinder(r=start+increment*i,h=20,$fn=20);
 
 }
 
