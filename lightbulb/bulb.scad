@@ -1,0 +1,12 @@
+radius=0.1;
+height=10;
+union(){
+%import("/home/b0ggyb33/Desktop/bulb_r.stl");
+rotate([90,90,0])
+{
+translate([-1.17,1.17,-7])
+{
+cylinder(r=radius,h=height,f=50);
+}
+}
+};
