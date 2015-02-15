@@ -5,7 +5,7 @@ depth=10;
 meeple_depth=9;
 meeple_height=8;
 sprue_radius=0.75;
-air_hole_radius=0.25;
+air_hole_radius=0.5;
 model_depth=depth-(meeple_depth*0.5);
 difference()
 {
